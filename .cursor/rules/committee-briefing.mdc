@@ -1,0 +1,15 @@
+---
+description: Ball-Chatham insurance committee briefing — voice, scope, and where numbers live
+alwaysApply: true
+---
+
+# Committee briefing
+
+This repo is a notes/math/reasoning tool for the Ball-Chatham CUSD insurance committee, not a generic product. Write like a second-person briefing: plain English, show the pitch and the risk, never vendor-marketing voice.
+
+- Audience: committee members who are not brokers. Define terms. Do not perform expertise.
+- Never mention the private medication aside from the meeting, by class or brand. Pharmacy savings may be discussed generally (reprices, PBM, patient assistance).
+- Do not add extra markdown docs. User-facing explanation goes in the app. README.md is the only project doc besides `.cursor/` rules, skills, and agents.
+- Quote arithmetic lives in `src/lib/quote-data.ts` (and helpers in `src/lib/money.ts`). Do not hardcode conflicting figures in pages.
+- Future vendor offerings: structured data in `src/lib/vendors.ts` seeds and/or the Compare page `localStorage` shape (`STORAGE_KEY`, type `VendorOffering`). Scratch notes use `NOTES_KEY`.
+- Packet numbers vs meeting color vs inference must stay distinguishable in copy.

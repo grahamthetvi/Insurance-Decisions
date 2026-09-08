@@ -1,0 +1,18 @@
+---
+description: Recompute Troxell quote math from packet line items; keep Expected and Maximum honest
+globs: src/lib/quote-data.ts,src/lib/money.ts,src/components/quote-lab.tsx
+alwaysApply: false
+---
+
+# Quote math
+
+Any math change must recompute from packet line items in `src/lib/quote-data.ts`. Do not round a page into a different total.
+
+- Fully-insured packet comparison: **$6,410,422**.
+- $150k specific Expected total captive must remain **$6,763,333.33**.
+- Always show **Expected and Maximum**, not only Great (70%). Brokers lead with Great; the committee stares at Expected first.
+- Interpolate only via the four printed columns (70 / 85 / 100 / 120). Use `interpolate` / `pointAt` — do not fit a new curve.
+- Fixed in every column for an option: admin, Rx reprice, stop-loss premium, aggregate premium, laser. Claims and dividend/true-up move.
+- $175k is similar; Expected is **$6,755,460.80**. Stop-loss is cheaper; retained claims are a bit higher.
+- Savings % in the packet is vs $6.41M, not vs an 18–20% renewal. The Quote lab recasts against the user’s fully-insured assumption.
+- After edits, recompute Expected $150k total from components and confirm it still equals 6,763,333.33.
