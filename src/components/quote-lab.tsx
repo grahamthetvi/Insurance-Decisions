@@ -242,7 +242,7 @@ export function QuoteLab() {
           The flat line is fully insured (you pay the premium no matter the claims). The sloping line is self-funding. Where they cross is the break-even claims year.
         </p>
         <div className="h-72 w-full">
-          <ResponsiveContainer>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData} margin={{ top: 8, right: 12, left: 8, bottom: 8 }}>
               <CartesianGrid stroke="oklch(0.88 0.02 75)" strokeDasharray="3 3" />
               <XAxis
