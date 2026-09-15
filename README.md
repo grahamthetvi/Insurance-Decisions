@@ -38,4 +38,7 @@ Future vendor offerings: add structured data in `src/lib/vendors.ts` (seeds) and
 
 ## Deploy
 
-This is a standard Next.js app. It can be deployed on Vercel with no special server. Compare and Notes use `localStorage`; they will not follow you across devices unless you copy them out.
+This is a standard Next.js app. It can be deployed on Vercel or GitHub Pages.
+
+### GitHub Pages
+A GitHub Actions workflow is included at `.github/workflows/deploy.yml`. In your GitHub repository settings under **Settings > Pages**, set **Source** to **GitHub Actions**. On every push to `main`, the static site is built with `output: "export"` and published to GitHub Pages. Compare and Notes use `localStorage`; they will not follow you across devices unless you copy them out.
