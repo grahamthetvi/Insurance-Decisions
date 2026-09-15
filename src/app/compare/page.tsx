@@ -12,7 +12,8 @@ export default function ComparePage() {
         climate. Additional companies you type in stay in this browser (
         {STORAGE_KEY}). If an offering should follow every committee member,
         also add it as a seed in the repo. Do not invent a premium to make the
-        table look complete.
+        table look complete. When you hand work to another AI agent, copy the
+        JSON at the bottom of this page — that is the shape it should hand back.
       </PageLead>
       <div className="mt-8">
         <CompareLab />
