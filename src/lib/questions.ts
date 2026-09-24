@@ -24,7 +24,7 @@ export const QUESTIONS: Question[] = [
     to: "Current carrier / broker of record",
     ask: `The draft sheet quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} and lists employee per-pay amounts. What is the district's total 1/1/2027 premium — board share plus employee share — on the same census as Troxell, and is ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} still draft?`,
     because:
-      `Meeting color was 18–20%. The sheet headline is ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. Paycheck lines rose by more than ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} because they are the employee share. None of those is the board's annual premium until someone writes the total down.`,
+      `Meeting color was 18–20%. The sheet headline is ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The paycheck lines are a different set of numbers, and on most tiers they rose by more than ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The sheet does not say why. None of those figures is the board's annual premium until someone writes the total down.`,
     goodAnswerLooksLike:
       "One page: current total premium, draft or final 2027 total premium, the board contribution rule, and a note that plan design did not change.",
   },
