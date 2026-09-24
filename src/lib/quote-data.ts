@@ -248,6 +248,135 @@ export function compareAt(args: {
   return { option, point, fullyInsured, delta, deltaPct, breakEven }
 }
 
+export type PacketChoiceId = "fully-insured" | "spec-150" | "spec-175"
+
+/** How both captive columns sit against the fully-insured number you picked. */
+export type FiVerdict =
+  | "captive-lower-expected-and-maximum"
+  | "captive-lower-expected-only"
+  | "fully-insured-lower-expected-and-maximum"
+  | "mixed"
+
+export type PacketChoice = {
+  id: PacketChoiceId
+  name: string
+  expected: number
+  maximum: number
+  /** Captive total minus the fully-insured number. Zero on the fully-insured row. */
+  vsFullyInsuredExpected: number
+  vsFullyInsuredMaximum: number
+  stopLossPremium: number | null
+  expectedClaims: number | null
+}
+
+export type PacketOptionComparison = {
+  fullyInsured: number
+  choices: PacketChoice[]
+  lowerExpectedId: PacketChoiceId
+  lowerMaximumId: PacketChoiceId
+  /** $175k total minus $150k total. Negative means the $175k column prints lower. */
+  gap175Minus150Expected: number
+  gap175Minus150Maximum: number
+  lower175InEveryColumn: boolean
+  stopLoss175Minus150: number
+  aggregate175Minus150: number
+  expectedClaims175Minus150: number
+  verdict: FiVerdict
+}
+
+function lowestChoiceId(
+  choices: PacketChoice[],
+  key: "expected" | "maximum",
+): PacketChoiceId {
+  return choices.reduce((best, row) =>
+    row[key] < best[key] ? row : best,
+  ).id
+}
+
+function fiVerdict(
+  low: DeductibleOption,
+  high: DeductibleOption,
+  fullyInsured: number,
+): FiVerdict {
+  const expectedLower =
+    low.rows.expected.totalCaptive < fullyInsured &&
+    high.rows.expected.totalCaptive < fullyInsured
+  const expectedHigher =
+    low.rows.expected.totalCaptive > fullyInsured &&
+    high.rows.expected.totalCaptive > fullyInsured
+  const maximumLower =
+    low.rows.maximum.totalCaptive < fullyInsured &&
+    high.rows.maximum.totalCaptive < fullyInsured
+  const maximumHigher =
+    low.rows.maximum.totalCaptive > fullyInsured &&
+    high.rows.maximum.totalCaptive > fullyInsured
+  if (expectedLower && maximumLower) return "captive-lower-expected-and-maximum"
+  if (expectedLower && maximumHigher) return "captive-lower-expected-only"
+  if (expectedHigher && maximumHigher) {
+    return "fully-insured-lower-expected-and-maximum"
+  }
+  return "mixed"
+}
+
+/**
+ * Stay fully insured vs the two printed specific deductibles.
+ * Totals come from the packet columns. Do not rebuild them from line items.
+ */
+export function comparePacketOptions(args: {
+  renewalPct: number
+  fiBase: FiBase
+}): PacketOptionComparison {
+  const fullyInsured = fullyInsuredCost(args.renewalPct, args.fiBase)
+  const opt150 = optionByDeductible(150_000)
+  const opt175 = optionByDeductible(175_000)
+  const captiveChoices: PacketChoice[] = [opt150, opt175].map((option) => {
+    const id: PacketChoiceId =
+      option.specificDeductible === 150_000 ? "spec-150" : "spec-175"
+    return {
+      id,
+      name: option.label,
+      expected: option.rows.expected.totalCaptive,
+      maximum: option.rows.maximum.totalCaptive,
+      vsFullyInsuredExpected: option.rows.expected.totalCaptive - fullyInsured,
+      vsFullyInsuredMaximum: option.rows.maximum.totalCaptive - fullyInsured,
+      stopLossPremium: option.stopLossPremium,
+      expectedClaims: option.expectedClaims,
+    }
+  })
+  const choices: PacketChoice[] = [
+    {
+      id: "fully-insured",
+      name: "Stay fully insured",
+      expected: fullyInsured,
+      maximum: fullyInsured,
+      vsFullyInsuredExpected: 0,
+      vsFullyInsuredMaximum: 0,
+      stopLossPremium: null,
+      expectedClaims: null,
+    },
+    ...captiveChoices,
+  ]
+  return {
+    fullyInsured,
+    choices,
+    lowerExpectedId: lowestChoiceId(choices, "expected"),
+    lowerMaximumId: lowestChoiceId(choices, "maximum"),
+    gap175Minus150Expected:
+      opt175.rows.expected.totalCaptive - opt150.rows.expected.totalCaptive,
+    gap175Minus150Maximum:
+      opt175.rows.maximum.totalCaptive - opt150.rows.maximum.totalCaptive,
+    lower175InEveryColumn: SCENARIOS.every(
+      (scenario) =>
+        opt175.rows[scenario.key].totalCaptive <
+        opt150.rows[scenario.key].totalCaptive,
+    ),
+    stopLoss175Minus150: opt175.stopLossPremium - opt150.stopLossPremium,
+    aggregate175Minus150: opt175.aggregatePremium - opt150.aggregatePremium,
+    expectedClaims175Minus150: opt175.expectedClaims - opt150.expectedClaims,
+    verdict: fiVerdict(opt150, opt175, fullyInsured),
+  }
+}
+
 export const TROXELL_STACK = [
   {
     n: "01",

@@ -13,6 +13,7 @@ import {
   YAxis,
 } from "recharts"
 import { Callout } from "@/components/callout"
+import { OptionCompare } from "@/components/option-compare"
 import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
 import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
@@ -372,6 +373,8 @@ export function QuoteLab() {
           })}
         </ul>
       </div>
+
+      <OptionCompare renewalPct={renewalPct} fiBase={fiBase} />
 
       <PacketTable deductible={deductible} fi={fullyInsured} />
     </div>

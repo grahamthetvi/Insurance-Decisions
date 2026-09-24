@@ -100,13 +100,13 @@ export default function HomePage() {
           Open the plan sheets
         </Link>
         <Link
-          href="/quote"
+          href="/quote#comparing-options"
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
             "h-10 px-4",
           )}
         >
-          Open the Quote lab
+          Compare the options
         </Link>
         <Link
           href="/questions"

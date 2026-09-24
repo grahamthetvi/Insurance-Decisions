@@ -25,7 +25,7 @@ Then open [http://127.0.0.1:43127](http://127.0.0.1:43127). Any uncommon port is
 | --- | --- |
 | `/` | The decision: self-fund vs this year’s fully-insured renewal |
 | `/plans` | Current 2026 Blue Cross sheets and the 2027 draft (quoted 39.7%) |
-| `/quote` | Interactive Troxell math (claims year + renewal %) |
+| `/quote` | Interactive Troxell math, plus a side-by-side of fully insured vs the $150k and $175k specifics |
 | `/how-it-works` | How money moves; the unbundled stack |
 | `/network` | Three-tier (SCA / Aetna wrap / out-of-network) |
 | `/glossary` | Lasers, aggregate, PBM, 12/15, … |
