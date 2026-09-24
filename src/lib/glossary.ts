@@ -99,9 +99,9 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "Laser",
     alsoHeardAs: ["no lasers"],
     oneLiner: "A higher deductible aimed at one known high-cost person, usually at renewal.",
-    body: "If a spouse is on a $2M therapy, the stop-loss carrier may say: everyone else stays at $150k, that person is lasered at $500k. The district then owns the gap. The board member asked about spouses; the presenter said no lasers. The packet prints Laser $0.00 for 2027. That is year one, after underwriting. Lasers usually appear at the first renewal, which is why 'no-new-laser' contract language is a real ask, not a nitpick.",
+    body: "If a spouse is on a $2M therapy, the stop-loss carrier may say: everyone else stays at $150k, that person is lasered at $500k. The district then owns the gap. The board member asked about spouses; the presenter said no lasers. The packet prints Laser $0.00 for 2027. A later illustration dated 9/23/2026 prints lasers of $525,000 at the $150k specific and $475,000 at the $175k specific, pending a final nurse review, and says the detail is on a second tab that was not in the photo. Those are two documents. Year-one $0 in the packet is not a lifetime promise, and it is not what the later sheet shows.",
     whyItMatters:
-      "Six of the district's ten biggest spenders being spouses is exactly the fact pattern that produces lasers later. Year-one $0 is not a lifetime promise.",
+      "Six of the district's ten biggest spenders being spouses is exactly the fact pattern that produces lasers. Ask which document governs, and ask to see the second tab before anyone treats $0 as the deal.",
     tags: ["risk"],
   },
   {
@@ -138,7 +138,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "Consociate Health",
     alsoHeardAs: ["Consociate Group"],
     oneLiner: "A Decatur third-party administrator. Not named on the Ball-Chatham sheet. Confirm it.",
-    body: "Consociate Health says it administers self-funded employer plans, including claims, and that schools are one of its markets. Its offices are in Decatur and East Peoria. HealthLink's public TPA list includes Consociate Group. Consociate's provider search includes HealthLink and Springfield Clinic Advantage with HealthLink, and also Springfield Clinic Advantage with Aetna. None of that sentence is printed on the Troxell employee sheet or in the meeting notes. The meeting left the TPA unnamed.",
+    body: "Consociate Health says it administers self-funded employer plans, including claims, and that schools are one of its markets. Its offices are in Decatur and East Peoria. The 9/23/2026 Troxell illustration names a line 'Consociate Health — TPA fee' and does not print a dollar in that row. The same sheet prices HealthLink and PHCS at $32 per employee per month for out-of-area access. HealthLink's public TPA list includes Consociate Group. The meeting itself left the TPA unnamed.",
     whyItMatters:
       "If Consociate is the TPA, that is who staff call in January, and Health Link is the network they have to take. Ask Troxell to put both names on one page.",
     tags: ["network", "vendors"],
