@@ -1,15 +1,18 @@
+import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
+import { pct } from "@/lib/money"
+
 export const RULES_OF_THUMB = [
   {
     id: "compare-renewal",
     title: "Compare against this year's fully-insured renewal, not last year's premium.",
-    why: "A self-funded quote that looks $350k more expensive than 'current rates' can still be cheaper than a 20% fully-insured renewal. The Troxell packet's $6.41M base may be current premium, the 2027 fully-insured ask, or something in between. Nail that down before anyone votes.",
+    why: `A self-funded quote that looks $350k more expensive than the packet line can still be cheaper than a fully-insured renewal. Meeting color was 18–20%. The 2027 Blue Cross draft quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The packet's $6.41M may be current premium, the 2027 ask, or something in between. Nail that down before anyone votes.`,
     test: "Ask: 'Is $6,410,422 what we pay now, or the fully-insured number for 1/1/2027?' Then rerun the Quote lab.",
   },
   {
     id: "stare-at-expected",
     title: "Stare at the Expected column first. Treat Great as a bonus.",
     why: "Brokers lead with the 23% savings column. That column assumes claims at 70% of expected plus a 25% loss-fund dividend. If that were the honest forecast, expected claims would already be lower. Expected is the forecast. Maximum is the cap.",
-    test: "If Expected loses and Maximum is painful, you are buying volatility, not a discount. If Expected wins only after you layer in a 20% fully-insured hike, say that out loud.",
+    test: `If Expected loses and Maximum is painful, you are buying volatility, not a discount. If Expected wins only after you layer in the draft ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} — or the meeting's 20% — say which assumption you used.`,
   },
   {
     id: "one-percent",

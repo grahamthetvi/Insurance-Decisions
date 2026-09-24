@@ -1,3 +1,12 @@
+import {
+  BCBS_DRAFT,
+  BCBS_DRAFT_QUOTED_INCREASE_PCT,
+  TROXELL_ASSUMED_INCREASE_PCT,
+  TROXELL_NETWORK_CORRECTION,
+  rate,
+} from "@/lib/bcbs-plans"
+import { pct, usd } from "@/lib/money"
+
 export type FundingModel =
   | "fully-insured"
   | "self-funded"
@@ -55,7 +64,7 @@ export const SEED_OFFERINGS: VendorOffering[] = [
   {
     id: "bcbs-fi",
     name: "Stay fully insured",
-    company: "BCBS Illinois (current climate)",
+    company: "BCBS Illinois",
     model: "fully-insured",
     locked: true,
     network: "BCBS Illinois (does not rent out)",
@@ -66,24 +75,27 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     lasers: "unknown",
     expectedAnnualCost: 6_410_422,
     maxAnnualCost: 6_410_422,
-    renewalPct: 20,
+    renewalPct: BCBS_DRAFT_QUOTED_INCREASE_PCT,
     localSupport: "National carrier service model",
     notes:
-      "Packet comparison base is $6,410,422. Meeting color: last year ~3%, this year likely ~20%, and 67% of BCBS IL customers hearing 18–20%. Replace expectedAnnualCost with the real renewal letter when it lands. For a 20% hike on the packet base, budget ~$7.69M.",
+      `Packet comparison base is $6,410,422 — that dollar is the Troxell packet, not a total printed on the BCBS sheets. The 2027 draft sheet quotes a ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} increase and shows employee per-pay deductions only. Meeting color remains last year ~3% and 67% of BCBS IL customers at 18–20%. Do not treat ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} × $6.41M as the renewal until someone confirms the packet line is current total premium.`,
     pros: [
       "One bill, one card, no new network for staff to learn.",
       "Catastrophe risk stays with the carrier for the plan year.",
+      "The 2027 draft keeps the same three plan designs: HSA 3500, PPO 2000, PPO 1500.",
     ],
     cons: [
-      "A ~20% renewal climate makes this the expensive certainty.",
+      `The draft sheet quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}, well above the 18–20% said in the Troxell meeting.`,
+      `Employee deductions on that draft rise by more than ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} on most tiers, and HSA employee-only goes from $0 to ${usd(rate(BCBS_DRAFT, "hsa-3500", "24", "ee"), 2)} per 24-pay check.`,
       "Claims stay a black box, and no surplus comes back in a healthy year.",
     ],
     openQuestions: [
-      "Is $6,410,422 current premium or the 1/1/2027 renewal? Get it in writing on the same census.",
+      "Is $6,410,422 current total premium or already the 1/1/2027 ask? The BCBS sheets do not print the district total.",
+      "Is 39.7% the final letter, and does it include the board share plus the employee share on the same census as Troxell?",
     ],
-    provenance: "packet",
+    provenance: "vendor-materials",
     sourceDetail:
-      "Packet base $6,410,422; renewal climate (~20%, 67% at 18–20%) is meeting color, not your letter.",
+      `2026 current sheet and 2027 draft sheet (quoted ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}). $6,410,422 is still the Troxell packet line, not a figure on those sheets. 18–20% is meeting color.`,
     effectiveDate: "",
     contractBasis: "",
     aggregateDetails: "Not applicable — carrier holds the risk.",
@@ -95,9 +107,9 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     company: "Troxell + unbundled stack",
     model: "captive",
     locked: true,
-    network: "SCA Tier 1 + Aetna wrap (Cigna/UMR were alternatives)",
+    network: `${TROXELL_NETWORK_CORRECTION} (committee correction). Meeting said SCA + Aetna wrap. The employee sheet still prints BCBS Illinois.`,
     pbm: "SmithRx, with likely Truveris oversight",
-    tpa: "Independent TPA (name still to confirm)",
+    tpa: "Not named on the sheet. Confirm Consociate Health (Decatur TPA).",
     stopLoss: "Specific + aggregate, medical and pharmacy (as presented)",
     specificDeductible: 150_000,
     lasers: "none-year-one",
@@ -106,7 +118,7 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     renewalPct: null,
     localSupport: "Springfield / Bloomington / Washington IL — high availability pitch",
     notes:
-      "Expected vs packet $6.41M is a loss (~$353k). Great vs packet is a ~23% save. Run the Quote lab before you quote either number in a board meeting. Year-one lasers $0. Confirm 2028 laser rights. Pharmacy reprice $312,760 is the main savings lever.",
+      `Expected vs packet $6.41M is a loss (~$353k). A separate 2027 employee sheet assumes a ${pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase and shows paycheck deductions, not this district total. That sheet prints Blue Cross as the carrier; the network is ${TROXELL_NETWORK_CORRECTION}. Consociate Health is a Decatur TPA that publicly lists HealthLink and Springfield Clinic Advantage with HealthLink. HealthLink lists Consociate Group as a contracted TPA. Neither name is printed on the Ball-Chatham sheet. Year-one lasers $0. Pharmacy reprice $312,760 is an estimate.`,
     pros: [
       "Unbundled vendors with separate medical and pharmacy reports you can actually read.",
       "Local coordinator in Springfield / Bloomington / Washington IL who shows up.",
@@ -114,13 +126,14 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     ],
     cons: [
       "Expected costs ~$353k more than the packet $6.41M line — you buy volatility, not a discount.",
-      "Network change: SCA Tier 1 plus an Aetna wrap, not the Blue card.",
+      "Network is not the Blue card. The meeting said an Aetna wrap. The new sheet's carrier row says Blue Cross, and that row is wrong: the network is Health Link. Those three stories do not match yet.",
       "Savings hinge on a $312,760 uncapped Rx reprice estimate, not a warranty.",
     ],
     openQuestions: [
       "What laser rights exist at 1/1/2028 — no-new-laser language or a cap?",
       "Is the pharmacy watchdog fee inside the $436,320 admin or extra?",
       "Who falls out on a disruption file (Memorial, HSHS, SIU, Barnes-Jewish)?",
+      "Is Consociate Health the TPA, and is Health Link the network, with or without Springfield Clinic Advantage?",
     ],
     provenance: "packet",
     sourceDetail:
