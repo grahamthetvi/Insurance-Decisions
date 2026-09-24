@@ -65,7 +65,7 @@ function deductibleCopy(comparison: PacketOptionComparison): string {
     comparison.lower175InEveryColumn
       ? `In all four printed columns, the $175,000 specific totals less than the $150,000 specific. At Expected the gap is ${usd(expectedGap)}. At Maximum it is ${usd(maximumGap)}.`
       : `At Expected the gap between the two specific deductibles is ${usd(expectedGap)}. At Maximum it is ${usd(maximumGap)}.`
-  return `${which} The packet prints specific stop-loss ${usd(stopLossGap)} lower on the $175,000 option, aggregate premium ${usd(aggregateGap)} higher, and expected claims the district keeps ${usd(claimsGap)} higher. The higher deductible is the part the total compresses into one line: each person keeps an extra $25,000 before specific stop-loss pays.`
+  return `${which} Separate packet lines, not a sum that rebuilds that gap: specific stop-loss is ${usd(stopLossGap)} lower on the $175,000 option, aggregate premium is ${usd(aggregateGap)} higher, and expected claims the district keeps are ${usd(claimsGap)} higher. Those lines do not add up to the gap above. Use the printed totals. The deductible difference is narrower than it sounds: a person who passes $150,000 keeps the next $25,000 before specific stop-loss pays. That is not $25,000 for every member, and it is not the Expected gap.`
 }
 
 export function OptionCompare({
@@ -158,10 +158,13 @@ export function OptionCompare({
 
       <Callout tone="gold" title="What the cheaper total does not decide">
         On the packet, both Troxell columns share the same unbundled stack, the
-        same year-one lasers at $0, and the same pharmacy reprice estimate. The
-        employee sheet still prints Blue Cross; that carrier row is the one
-        corrected to Health Link. Staying fully insured keeps the Blue Cross
-        card and leaves catastrophe risk with the carrier for the plan year.
+        same year-one lasers at $0, and the same pharmacy reprice estimate
+        ($312,760, uncapped, not a warranty). The employee sheet still prints
+        Blue Cross. The meeting said an Aetna wrap. The 9/23 illustration
+        prices HealthLink and PHCS as an out-of-area fee and uses a separate
+        −$350,000 pharmacy rebate estimate. Those stories do not match yet.
+        Staying fully insured keeps the Blue Cross card and leaves catastrophe
+        risk with the carrier for the plan year.
         Confirm stop-loss medical and pharmacy, the 12/15 contract, lasers, and
         the network on the specimen and the disruption file — not from this
         table.
