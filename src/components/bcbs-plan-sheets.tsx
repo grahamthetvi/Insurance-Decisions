@@ -137,8 +137,13 @@ export function BcbsPlanSheets() {
         not Blue Cross. The sheet is also labeled self-insured captive, with an
         assumed {pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase. Plan design
         still matches the Blue Cross cards. The meeting had described Springfield
-        Clinic Advantage plus an Aetna wrap. Health Link is the correction on
-        this sheet. Ask Troxell which doctors are in, in writing.
+        Clinic Advantage plus an Aetna wrap.         Health Link is the correction on
+        this sheet. Consociate Health, a TPA in Decatur, is the firm to
+        confirm: HealthLink lists Consociate Group as a contracted TPA, and
+        Consociate lists HealthLink and Springfield Clinic Advantage with
+        HealthLink. Neither name is printed on this sheet. The meeting had
+        said an Aetna wrap and did not name the TPA. Ask Troxell to put the
+        network and the TPA on one page.
       </Callout>
 
       <section className="space-y-4">
