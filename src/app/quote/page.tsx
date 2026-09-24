@@ -1,5 +1,6 @@
 import { PageKicker, PageLead, PageTitle } from "@/components/callout"
 import { QuoteLab } from "@/components/quote-lab"
+import { TroxellIllustration } from "@/components/troxell-illustration"
 import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
 import {
   BCBS_MARKET_RANGE,
@@ -32,6 +33,9 @@ export default function QuotePage() {
       </PageLead>
       <div className="mt-8">
         <QuoteLab />
+      </div>
+      <div className="mt-12">
+        <TroxellIllustration />
       </div>
     </div>
   )

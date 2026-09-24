@@ -79,9 +79,9 @@ export const QUESTIONS: Question[] = [
   {
     id: "laser-renewal",
     to: "Troxell / stop-loss",
-    ask: "What laser rights exist at 1/1/2028, and will you put no-new-laser or a laser cap in the deal?",
+    ask: "The packet prints laser $0. The 9/23 illustration prints $525,000 and $475,000 pending nurse review, and points to a second tab. Which number is in the deal, and may we see that tab?",
     because:
-      "Year-one $0 lasers after they have seen the data is table stakes. Spouses as 6 of 10 large claimants is the year-two fight.",
+      "A laser is the gap the district pays before stop-loss starts for a known person. $0 and half a million dollars are different deals. Spouses as 6 of 10 large claimants is why this line exists.",
     goodAnswerLooksLike:
       "Written no-new-laser, or a maximum laser amount, with the rate-cap that comes with it.",
   },
