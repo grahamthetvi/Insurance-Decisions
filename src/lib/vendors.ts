@@ -1,3 +1,10 @@
+import {
+  BCBS_DRAFT,
+  BCBS_DRAFT_QUOTED_INCREASE_PCT,
+  rate,
+} from "@/lib/bcbs-plans"
+import { pct, usd } from "@/lib/money"
+
 export type FundingModel =
   | "fully-insured"
   | "self-funded"
@@ -55,7 +62,7 @@ export const SEED_OFFERINGS: VendorOffering[] = [
   {
     id: "bcbs-fi",
     name: "Stay fully insured",
-    company: "BCBS Illinois (current climate)",
+    company: "BCBS Illinois",
     model: "fully-insured",
     locked: true,
     network: "BCBS Illinois (does not rent out)",
@@ -66,24 +73,27 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     lasers: "unknown",
     expectedAnnualCost: 6_410_422,
     maxAnnualCost: 6_410_422,
-    renewalPct: 20,
+    renewalPct: BCBS_DRAFT_QUOTED_INCREASE_PCT,
     localSupport: "National carrier service model",
     notes:
-      "Packet comparison base is $6,410,422. Meeting color: last year ~3%, this year likely ~20%, and 67% of BCBS IL customers hearing 18–20%. Replace expectedAnnualCost with the real renewal letter when it lands. For a 20% hike on the packet base, budget ~$7.69M.",
+      `Packet comparison base is $6,410,422 — that dollar is the Troxell packet, not a total printed on the BCBS sheets. The 2027 draft sheet quotes a ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} increase and shows employee per-pay deductions only. Meeting color remains last year ~3% and 67% of BCBS IL customers at 18–20%. Do not treat ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} × $6.41M as the renewal until someone confirms the packet line is current total premium.`,
     pros: [
       "One bill, one card, no new network for staff to learn.",
       "Catastrophe risk stays with the carrier for the plan year.",
+      "The 2027 draft keeps the same three plan designs: HSA 3500, PPO 2000, PPO 1500.",
     ],
     cons: [
-      "A ~20% renewal climate makes this the expensive certainty.",
+      `The draft sheet quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}, well above the 18–20% said in the Troxell meeting.`,
+      `Employee deductions on that draft rise by more than ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} on most tiers, and HSA employee-only goes from $0 to ${usd(rate(BCBS_DRAFT, "hsa-3500", "24", "ee"), 2)} per 24-pay check.`,
       "Claims stay a black box, and no surplus comes back in a healthy year.",
     ],
     openQuestions: [
-      "Is $6,410,422 current premium or the 1/1/2027 renewal? Get it in writing on the same census.",
+      "Is $6,410,422 current total premium or already the 1/1/2027 ask? The BCBS sheets do not print the district total.",
+      "Is 39.7% the final letter, and does it include the board share plus the employee share on the same census as Troxell?",
     ],
-    provenance: "packet",
+    provenance: "vendor-materials",
     sourceDetail:
-      "Packet base $6,410,422; renewal climate (~20%, 67% at 18–20%) is meeting color, not your letter.",
+      `2026 current sheet and 2027 draft sheet (quoted ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}). $6,410,422 is still the Troxell packet line, not a figure on those sheets. 18–20% is meeting color.`,
     effectiveDate: "",
     contractBasis: "",
     aggregateDetails: "Not applicable — carrier holds the risk.",

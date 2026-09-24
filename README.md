@@ -8,7 +8,7 @@ This is **not** advice, a recommendation, or a substitute for the packet, the st
 
 Against the packet’s fully-insured comparison of **$6,410,422**, the **Expected** self-funded year at a $150,000 specific deductible is **$6,763,333.33** — about **$353k more**, not less.
 
-If that $6.41M is **current** premium and a fully-insured renewal is really ~20% (~**$7.69M**), Expected self-funding **wins**. If $6.41M is already the 2027 fully-insured quote, Expected self-funding **costs more**. The Quote lab has a toggle for those two readings. Stare at Expected and Maximum, not only the Great (70%) column.
+If that $6.41M is **current** premium and a fully-insured renewal is really ~20% (~**$7.69M**), Expected self-funding **wins**. The 2027 Blue Cross **draft** sheet quotes **39.7%** — steeper than the 18–20% said in the meeting, and it lists employee per-pay amounts, not the district total. Applying 39.7% to $6.41M is only valid if that packet line is current premium. If $6.41M is already the 2027 fully-insured quote, Expected self-funding **costs more**. The Quote lab has a toggle for those two readings and opens on the draft 39.7%. Stare at Expected and Maximum, not only the Great (70%) column.
 
 ## Run locally
 
@@ -24,6 +24,7 @@ Then open [http://127.0.0.1:43127](http://127.0.0.1:43127). Any uncommon port is
 | Route | What it is |
 | --- | --- |
 | `/` | The decision: self-fund vs this year’s fully-insured renewal |
+| `/plans` | Current 2026 Blue Cross sheets and the 2027 draft (quoted 39.7%) |
 | `/quote` | Interactive Troxell math (claims year + renewal %) |
 | `/how-it-works` | How money moves; the unbundled stack |
 | `/network` | Three-tier (SCA / Aetna wrap / out-of-network) |

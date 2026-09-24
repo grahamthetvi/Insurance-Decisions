@@ -1,3 +1,6 @@
+import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
+import { pct } from "@/lib/money"
+
 export type MeetingBlock = {
   id: string
   heading: string
@@ -22,7 +25,7 @@ export const MEETING = {
         "He said always take a 1% renewal. Translation: if someone later offers ~1%, that is a gift in this market. Do not shop a gift into the grave. You do not have a gift right now.",
       ],
       watchFor:
-        "Get the district's real fully-insured renewal, in writing, with the same census the Troxell quote used.",
+        `A 2027 Blue Cross draft sheet now quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. That arrived after this meeting color (18–20%). Still get the district's total premium, in writing, on the same census as the Troxell quote — the sheet shows employee per-pay amounts, not the board's annual bill.`,
     },
     {
       id: "who",

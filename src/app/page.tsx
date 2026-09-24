@@ -1,29 +1,29 @@
 import Link from "next/link"
 import { PageKicker, PageLead, PageTitle, Callout } from "@/components/callout"
 import { buttonVariants } from "@/components/ui/button"
+import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
 import {
   BCBS_MARKET_RANGE,
   DISTRICT,
   LAST_YEAR_RENEWAL_PCT,
   PACKET_FULLY_INSURED,
-  THIS_YEAR_LIKELY_RENEWAL_PCT,
   fullyInsuredCost,
   optionByDeductible,
 } from "@/lib/quote-data"
 import { NAV } from "@/lib/nav"
-import { usd } from "@/lib/money"
+import { pct, usd } from "@/lib/money"
 import { cn } from "@/lib/utils"
 
 const option150 = optionByDeductible(150_000)
 const expected = option150.rows.expected
 const maximum = option150.rows.maximum
 const great = option150.rows.great
-const fiAtLikely = fullyInsuredCost(
-  THIS_YEAR_LIKELY_RENEWAL_PCT,
+const fiAtDraft = fullyInsuredCost(
+  BCBS_DRAFT_QUOTED_INCREASE_PCT,
   "packet-is-current",
 )
-const vsRenewal = expected.totalCaptive - fiAtLikely
-const maxVsRenewal = maximum.totalCaptive - fiAtLikely
+const vsDraft = expected.totalCaptive - fiAtDraft
+const maxVsDraft = maximum.totalCaptive - fiAtDraft
 
 export default function HomePage() {
   return (
@@ -39,10 +39,11 @@ export default function HomePage() {
         </PageTitle>
         <PageLead>
           Last year&apos;s fully-insured renewal was about {LAST_YEAR_RENEWAL_PCT}
-          %. This year the room is talking {BCBS_MARKET_RANGE[0]}–
-          {BCBS_MARKET_RANGE[1]}%. The fork is whether Ball-Chatham stays fully
-          insured at that kind of hike, or steps into self-funding with a
-          ceiling. The Troxell packet&apos;s pretty column is not the decision.
+          %. In the Troxell meeting the room heard {BCBS_MARKET_RANGE[0]}–
+          {BCBS_MARKET_RANGE[1]}%. The Blue Cross draft for 1/1/2027 quotes{" "}
+          {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. That draft is a plan sheet,
+          not the final letter, and it is not the same document as the packet
+          line of {usd(PACKET_FULLY_INSURED)}.
         </PageLead>
       </header>
 
@@ -59,12 +60,12 @@ export default function HomePage() {
           tone="risk"
         />
         <Stat
-          label={`Fully insured if +${THIS_YEAR_LIKELY_RENEWAL_PCT}% on that base`}
-          value={usd(fiAtLikely)}
+          label={`If packet line is current and the draft ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} applies`}
+          value={usd(fiAtDraft)}
           hint={
-            vsRenewal < 0
-              ? `Expected then wins by ${usd(Math.abs(vsRenewal))}. Maximum still overshoots by ${usd(maxVsRenewal)}.`
-              : "Expected still costs more even after the hike."
+            vsDraft < 0
+              ? `Expected is ${usd(Math.abs(vsDraft))} under that figure. Maximum is ${usd(Math.abs(maxVsDraft))} ${maxVsDraft < 0 ? "under" : "over"} it. This math assumes the packet line is this year's total premium.`
+              : "Expected still costs more even after the draft hike, if the packet line is current premium."
           }
           tone="save"
         />
@@ -80,19 +81,30 @@ export default function HomePage() {
         packet line.
       </Callout>
 
-      <Callout tone="gold" title="The comparison that actually matches the meeting.">
-        If {usd(PACKET_FULLY_INSURED)} is what you pay now, and fully insured
-        renews ~{THIS_YEAR_LIKELY_RENEWAL_PCT}% ({usd(fiAtLikely)}), Expected
-        self-funding wins by {usd(Math.abs(vsRenewal))}. You are still buying
-        volatility: the Maximum column is {usd(maxVsRenewal)} above that same
-        hiked premium. Confirm the $6.41M in writing, then use the Quote lab
-        toggle — do not vote on a vibe from “67% of Blue Cross customers.”
+      <Callout tone="gold" title="The draft sheet is steeper than the meeting.">
+        Meeting color was {BCBS_MARKET_RANGE[0]}–{BCBS_MARKET_RANGE[1]}%. The
+        2027 Blue Cross sheet, marked draft, quotes{" "}
+        {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. If {usd(PACKET_FULLY_INSURED)}{" "}
+        is current total premium, that hike is {usd(fiAtDraft)}, and Expected
+        self-funding is {usd(Math.abs(vsDraft))} under it. Employee paycheck
+        lines on the same sheet move by more than{" "}
+        {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} — those are the employee share,
+        not the district total. Read the sheets, then use the Quote lab toggle.
       </Callout>
 
       <div className="flex flex-wrap gap-2">
         <Link
-          href="/quote"
+          href="/plans"
           className={cn(buttonVariants({ size: "lg" }), "h-10 px-4")}
+        >
+          Open the Blue Cross sheets
+        </Link>
+        <Link
+          href="/quote"
+          className={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "h-10 px-4",
+          )}
         >
           Open the Quote lab
         </Link>

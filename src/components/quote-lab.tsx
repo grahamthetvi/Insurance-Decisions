@@ -15,12 +15,16 @@ import {
 import { Callout } from "@/components/callout"
 import { Badge } from "@/components/ui/badge"
 import { Slider } from "@/components/ui/slider"
+import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
 import {
+  BCBS_MARKET_RANGE,
   compareAt,
   fullyInsuredCost,
+  LAST_YEAR_RENEWAL_PCT,
   OPTIONS,
   PACKET_FULLY_INSURED,
   SCENARIOS,
+  THIS_YEAR_LIKELY_RENEWAL_PCT,
   optionByDeductible,
   pointAt,
   type FiBase,
@@ -30,6 +34,7 @@ import { cn } from "@/lib/utils"
 
 const CLAIMS_MIN = 70
 const CLAIMS_MAX = 120
+const RENEWAL_MAX = 50
 
 function snap(values: number | readonly number[], min: number, max: number) {
   const n = typeof values === "number" ? values : (values[0] ?? min)
@@ -39,7 +44,7 @@ function snap(values: number | readonly number[], min: number, max: number) {
 export function QuoteLab() {
   const [deductible, setDeductible] = useState<150_000 | 175_000>(150_000)
   const [claimsPct, setClaimsPct] = useState(100)
-  const [renewalPct, setRenewalPct] = useState(20)
+  const [renewalPct, setRenewalPct] = useState(BCBS_DRAFT_QUOTED_INCREASE_PCT)
   const [fiBase, setFiBase] = useState<FiBase>("packet-is-current")
 
   const result = compareAt({ deductible, claimsPct, renewalPct, fiBase })
@@ -117,7 +122,7 @@ export function QuoteLab() {
                 [
                   "packet-is-current",
                   "Current premium — apply a renewal on top",
-                  "Matches the meeting: last year 3%, this year maybe 20%.",
+                  `Meeting color was ${BCBS_MARKET_RANGE[0]}–${BCBS_MARKET_RANGE[1]}%. The 2027 draft sheet quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}.`,
                 ],
                 [
                   "packet-is-renewal",
@@ -179,19 +184,45 @@ export function QuoteLab() {
               <p className="font-mono text-sm tabular-nums">{renewalPct}%</p>
             </div>
             <p className="mb-3 text-xs text-muted-foreground">
-              Last year was ~3%. The room is talking ~20%. BCBS Illinois color: 67% of customers at 18–20%.
+              Last year was ~{LAST_YEAR_RENEWAL_PCT}%. Meeting color is{" "}
+              {BCBS_MARKET_RANGE[0]}–{BCBS_MARKET_RANGE[1]}%. The 2027 Blue Cross
+              draft sheet quotes {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. Applying
+              either number to {usd(PACKET_FULLY_INSURED)} assumes that packet
+              line is current total premium.
             </p>
+            <div className="mb-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setRenewalPct(THIS_YEAR_LIKELY_RENEWAL_PCT)}
+                className="rounded-md border border-border px-2 py-1 text-xs hover:bg-muted"
+              >
+                Meeting color {THIS_YEAR_LIKELY_RENEWAL_PCT}%
+              </button>
+              <button
+                type="button"
+                onClick={() => setRenewalPct(BCBS_DRAFT_QUOTED_INCREASE_PCT)}
+                className="rounded-md border border-border px-2 py-1 text-xs hover:bg-muted"
+              >
+                Draft sheet {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}
+              </button>
+            </div>
             <Slider
               min={0}
-              max={30}
+              max={RENEWAL_MAX}
+              step={0.1}
               value={[renewalPct]}
-              onValueChange={(v) => setRenewalPct(snap(v, 0, 30))}
+              onValueChange={(v) => {
+                const n = typeof v === "number" ? v : (v[0] ?? 0)
+                const clamped = Math.min(RENEWAL_MAX, Math.max(0, n))
+                setRenewalPct(Math.round(clamped * 10) / 10)
+              }}
             />
             <div className="mt-2 flex justify-between font-mono text-[10px] tracking-wide text-muted-foreground uppercase">
               <span>0% flat</span>
-              <span>3% last year</span>
-              <span>20% this year?</span>
-              <span>30%</span>
+              <span>{LAST_YEAR_RENEWAL_PCT}% last year</span>
+              <span>{THIS_YEAR_LIKELY_RENEWAL_PCT}% meeting</span>
+              <span>{pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} draft</span>
+              <span>{RENEWAL_MAX}%</span>
             </div>
           </div>
         ) : null}

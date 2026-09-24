@@ -1,3 +1,6 @@
+import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
+import { pct } from "@/lib/money"
+
 export type Question = {
   id: string
   to: string
@@ -12,18 +15,18 @@ export const QUESTIONS: Question[] = [
     to: "Troxell / administration",
     ask: "Is the $6,410,422 in the packet what Ball-Chatham pays today, or the fully-insured premium for 1/1/2027?",
     because:
-      "Every savings percentage in the packet is vs that number. If it is current premium, a 20% Blue Cross renewal makes Expected self-funding look like a save. If it is already the 2027 fully-insured quote, Expected self-funding costs more.",
+      `Every savings percentage in the packet is vs that number. The 2027 Blue Cross draft quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}, which is a different document from the $6.41M line. If $6.41M is current total premium, that draft hike makes Expected self-funding look cheaper. If $6.41M is already the 2027 ask, Expected costs more.`,
     goodAnswerLooksLike:
       "A one-line written answer plus the matching census (employees, spouses, children) and the fully-insured renewal letter.",
   },
   {
     id: "real-renewal",
     to: "Current carrier / broker of record",
-    ask: "What is the actual 1/1/2027 fully-insured renewal, on the same census, in writing?",
+    ask: `The draft sheet quotes ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} and lists employee per-pay amounts. What is the district's total 1/1/2027 premium — board share plus employee share — on the same census as Troxell, and is ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} still draft?`,
     because:
-      "Market color ('67% of BCBS customers at 18–20%') is not Ball-Chatham's number. You cannot vote on a vibe.",
+      `Meeting color was 18–20%. The sheet headline is ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. Paycheck lines rose by more than ${pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} because they are the employee share. None of those is the board's annual premium until someone writes the total down.`,
     goodAnswerLooksLike:
-      "A rate sheet with current vs renewal annualized premium, and whether any plan-design changes are baked in.",
+      "One page: current total premium, draft or final 2027 total premium, the board contribution rule, and a note that plan design did not change.",
   },
   {
     id: "expected-lose",
@@ -100,9 +103,9 @@ export const QUESTIONS: Question[] = [
   {
     id: "tier-grid",
     to: "Troxell",
-    ask: "Show the three-tier copay/coinsurance grid vs today's plan, not just the network story.",
+    ask: "Show the three-tier copay/coinsurance grid next to today's Blue Cross grid (HSA 3500, PPO 2000, PPO 1500), not just the network story.",
     because:
-      "A cheaper district cost with a meaner deductible is a compensation cut. The board should know which it is.",
+      "Today's design is on the Blue Cross page, and the 2027 draft keeps it. A cheaper district cost with a meaner deductible is a compensation cut. The board should see both grids.",
     goodAnswerLooksLike:
       "Side-by-side: PCP, specialist, ER, Rx tiers, OOP max, for employee and family.",
   },

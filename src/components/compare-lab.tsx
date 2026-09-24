@@ -424,7 +424,7 @@ export function CompareLab() {
                     : usd(o.expectedAnnualCost)}
                   {o.renewalPct != null ? (
                     <span className="mt-0.5 block text-xs text-muted-foreground">
-                      ~{o.renewalPct}% renewal climate
+                      ~{o.renewalPct}% renewal on file
                     </span>
                   ) : null}
                 </td>
