@@ -8,10 +8,13 @@ import {
   BCBS_DRAFT,
   BCBS_DRAFT_QUOTED_INCREASE_PCT,
   BCBS_PLANS,
+  TROXELL_ASSUMED_INCREASE_PCT,
+  TROXELL_EMPLOYEE_DRAFT,
+  TROXELL_NETWORK_CORRECTION,
+  TROXELL_SHEET_PRINTED_CARRIER,
   COVERAGE_TIERS,
   PAY_SCHEDULES,
   annualEmployeeDeduction,
-  deductionChange,
   rate,
   type PayScheduleId,
 } from "@/lib/bcbs-plans"
@@ -48,11 +51,11 @@ export function BcbsPlanSheets() {
         <div>
           <h2 className="font-heading text-2xl">What comes out of the paycheck</h2>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-            Employee deduction per pay, as printed. Annual column is that
-            amount times {pays.pays} pays — arithmetic from the sheet, not a
-            separate quote. The draft&apos;s {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}{" "}
-            headline is the increase quoted on the sheet. It is not the percent
-            change in these paycheck lines.
+            Employee deduction per pay, as printed. The year line is that
+            amount times {pays.pays} pays. The Blue Cross draft headline is{" "}
+            {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The Troxell draft headline
+            is an assumed {pct(TROXELL_ASSUMED_INCREASE_PCT, 0)}. Neither
+            headline is the percent change in these paycheck lines.
           </p>
         </div>
 
@@ -78,25 +81,35 @@ export function BcbsPlanSheets() {
                   {BCBS_PLANS.map((plan) => {
                     const current = rate(BCBS_CURRENT, plan.id, schedule, tier.id)
                     const next = rate(BCBS_DRAFT, plan.id, schedule, tier.id)
-                    const change = deductionChange(current, next)
+                    const troxell = rate(
+                      TROXELL_EMPLOYEE_DRAFT,
+                      plan.id,
+                      schedule,
+                      tier.id,
+                    )
+                    const vsBlue = next - troxell
                     return (
                       <td key={plan.id} className="px-3 py-3 tabular-nums">
                         <p>
-                          <span className="text-muted-foreground">2026 </span>
+                          <span className="text-muted-foreground">2026 Blue Cross </span>
                           {usd(current, 2)}
                         </p>
                         <p>
-                          <span className="text-muted-foreground">2027 draft </span>
+                          <span className="text-muted-foreground">2027 Blue Cross draft </span>
                           {usd(next, 2)}
                         </p>
-                        <p className="text-risk">
-                          {change.pct == null
-                            ? `New deduction ${usd(change.dollars, 2)} (2026 was $0)`
-                            : `+${usd(change.dollars, 2)} per pay (${pct(change.pct, 1)})`}
+                        <p>
+                          <span className="text-muted-foreground">2027 Troxell draft </span>
+                          {usd(troxell, 2)}
+                        </p>
+                        <p className={vsBlue >= 0 ? "text-save" : "text-risk"}>
+                          {vsBlue >= 0
+                            ? `${usd(vsBlue, 2)} less per pay than the Blue Cross draft`
+                            : `${usd(Math.abs(vsBlue), 2)} more per pay than the Blue Cross draft`}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Year: {usd(annualEmployeeDeduction(current, schedule), 2)}{" "}
-                          → {usd(annualEmployeeDeduction(next, schedule), 2)}
+                          Troxell year:{" "}
+                          {usd(annualEmployeeDeduction(troxell, schedule), 2)}
                         </p>
                       </td>
                     )
@@ -109,21 +122,33 @@ export function BcbsPlanSheets() {
       </section>
 
       <Callout tone="gold" title="These checks are not the district's premium.">
-        Employee-only on the HSA is {usd(0, 2)} in 2026 and{" "}
-        {usd(rate(BCBS_DRAFT, "hsa-3500", "24", "ee"), 2)} per 24-pay check on
-        the draft. A total premium cannot be $0, so this grid is the employee
-        share. The board&apos;s share is not on either sheet. Do not add these
-        paychecks up and call the sum the {usd(PACKET_FULLY_INSURED)} packet line.
+        Employee-only on the HSA is {usd(0, 2)} in 2026,{" "}
+        {usd(rate(BCBS_DRAFT, "hsa-3500", "24", "ee"), 2)} on the Blue Cross
+        draft, and {usd(rate(TROXELL_EMPLOYEE_DRAFT, "hsa-3500", "24", "ee"), 2)}{" "}
+        on the Troxell draft, per 24-pay check. A total premium cannot be $0,
+        so this grid is the employee share. The Troxell packet&apos;s{" "}
+        {usd(PACKET_FULLY_INSURED)} line is a different document. Do not add
+        these paychecks up and call the sum either quote.
+      </Callout>
+
+      <Callout tone="risk" title="The Troxell sheet names the wrong network.">
+        The carrier row prints {TROXELL_SHEET_PRINTED_CARRIER}. That cell is
+        wrong for this option. The provider network is {TROXELL_NETWORK_CORRECTION},
+        not Blue Cross. The sheet is also labeled self-insured captive, with an
+        assumed {pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase. Plan design
+        still matches the Blue Cross cards. The meeting had described Springfield
+        Clinic Advantage plus an Aetna wrap. Health Link is the correction on
+        this sheet. Ask Troxell which doctors are in, in writing.
       </Callout>
 
       <section className="space-y-4">
         <div>
-          <h2 className="font-heading text-2xl">Plan design — same on both sheets</h2>
+          <h2 className="font-heading text-2xl">Plan design — same on all three sheets</h2>
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-            Deductibles, copays, and drug tiers print the same for 2026 and the
-            2027 draft. The draft is a price change on these three cards, not a
-            redesigned plan. Member costs below are what the employee pays at
-            the doctor, after the paycheck deduction above.
+            Deductibles, copays, and drug tiers print the same for 2026 Blue
+            Cross, the 2027 Blue Cross draft, and the 2027 Troxell draft. The
+            drafts change the paycheck, not the card design. Member costs below
+            are what the employee pays at the doctor.
           </p>
         </div>
         <div className="overflow-x-auto rounded-xl border border-border bg-card">

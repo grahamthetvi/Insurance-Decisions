@@ -117,28 +117,38 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     id: "network-rental",
     term: "Network rental (why not Blue Cross)",
-    oneLiner: "BCBS generally will not let an outside TPA use the Blue network. Aetna will.",
-    body: "Carriers 'rent' their contracted doctor discounts to self-funded plans. Blue Cross Illinois historically does not. That is why self-funded Illinois groups land on Aetna, Cigna, UMR (United's TPA), or a local wrap. Troxell said Aetna currently has the best pricing among those national options. You are not keeping the Blue Cross card with a different bank account. Staff will notice.",
+    oneLiner: "BCBS generally will not let an outside TPA use the Blue network.",
+    body: "Carriers rent their contracted doctor discounts to self-funded plans. Blue Cross Illinois historically does not. In the meeting, Troxell said Aetna had the best price among Aetna, Cigna, and UMR. A later employee sheet still prints Blue Cross as the carrier. That cell is wrong. The network for the Troxell option is Health Link. Health Link is a provider network used with third-party administrators in Illinois and Missouri. You are not keeping the Blue Cross card.",
     whyItMatters:
-      "If the political goal is 'don't make people change doctors,' you still need a disruption file, not a slogan. They claim 98% overlap locally.",
+      "If the political goal is 'don't make people change doctors,' you need a disruption file against Health Link. The meeting's 98% claim was about the Aetna story, not this correction.",
     tags: ["network"],
   },
   {
     id: "wrap",
     term: "Wrap network",
-    alsoHeardAs: ["Aetna wrap"],
-    oneLiner: "The national network that covers everyone SCA does not.",
-    body: "Tier 1 is Springfield Clinic Advantage (local steerage). The wrap is Aetna sitting around it so the plan still looks like a normal PPO when someone is in St. Louis, at college, or at Barnes-Jewish. SCA + Aetna wrap is the architecture they described.",
+    alsoHeardAs: ["Aetna wrap", "Health Link"],
+    oneLiner: "The network around Springfield Clinic. The meeting said Aetna. The correction is Health Link.",
+    body: "Tier 1 in the meeting was Springfield Clinic Advantage. The wrap they described was Aetna, so the card still works at college and at Barnes-Jewish. The later Troxell employee sheet prints Blue Cross in the carrier row, and that row is wrong: the network is Health Link. Consociate Health, a Decatur TPA, publicly lists both HealthLink and 'Springfield Clinic Advantage with HealthLink' on its provider search. That is a reason to ask, not a contract.",
     whyItMatters:
       "Ask who is Tier 1 vs Tier 2 at Memorial, HSHS, SIU, and Barnes-Jewish so you do not discover it in January.",
     tags: ["network"],
+  },
+  {
+    id: "consociate",
+    term: "Consociate Health",
+    alsoHeardAs: ["Consociate Group"],
+    oneLiner: "A Decatur third-party administrator. Not named on the Ball-Chatham sheet. Confirm it.",
+    body: "Consociate Health says it administers self-funded employer plans, including claims, and that schools are one of its markets. Its offices are in Decatur and East Peoria. HealthLink's public TPA list includes Consociate Group. Consociate's provider search includes HealthLink and Springfield Clinic Advantage with HealthLink, and also Springfield Clinic Advantage with Aetna. None of that sentence is printed on the Troxell employee sheet or in the meeting notes. The meeting left the TPA unnamed.",
+    whyItMatters:
+      "If Consociate is the TPA, that is who staff call in January, and Health Link is the network they have to take. Ask Troxell to put both names on one page.",
+    tags: ["network", "vendors"],
   },
   {
     id: "sca",
     term: "SCA / Springfield Clinic Advantage",
     alsoHeardAs: ["Springfield Clinic Advance", "tier 1"],
     oneLiner: "The local preferred tier: Springfield Clinic doctors, richer benefits, better discounts.",
-    body: "Springfield Clinic built Advantage as an employer plan after years of friction with BCBS. Troxell is plugging that preferred network in as Tier 1 of a three-tier design. Members who already live in Springfield Clinic save. Members whose cardiologist is elsewhere still have Aetna Tier 2, at a worse benefit. Steerage only works if the benefit gap is real and the clinic has capacity.",
+    body: "Springfield Clinic built Advantage as an employer plan after years of friction with BCBS. In the meeting, Troxell put it in as tier 1, with Aetna as the next tier. The later correction names Health Link as the network, and Consociate's public search has a box for Springfield Clinic Advantage with HealthLink. Steerage only works if the benefit gap is real and the clinic has capacity.",
     whyItMatters:
       "This is both a cost play and a local-politics play. Map your enrolled members' current PCPs before you sell it as painless.",
     tags: ["network"],
@@ -146,7 +156,7 @@ export const GLOSSARY: GlossaryEntry[] = [
   {
     id: "three-tier",
     term: "Three-tier plan",
-    oneLiner: "Tier 1 SCA (best), Tier 2 Aetna in-network, Tier 3 out-of-network (worst).",
+    oneLiner: "Meeting version: tier 1 SCA, tier 2 Aetna, tier 3 out of network. The network correction is Health Link.",
     body: "Classic preferred-provider design. Copays, coinsurance, and deductibles get worse as you leave the preferred clinic, then worse again if you leave the national network. Out-of-network is where balance bills live.",
     whyItMatters:
       "Print a one-page copay grid before open enrollment. Staff will not read the SPD. They will read 'PCP $10 vs $40 vs 50%.'",

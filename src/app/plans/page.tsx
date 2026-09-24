@@ -7,6 +7,8 @@ import {
   BCBS_CURRENT,
   BCBS_DRAFT,
   BCBS_DRAFT_QUOTED_INCREASE_PCT,
+  TROXELL_ASSUMED_INCREASE_PCT,
+  TROXELL_NETWORK_CORRECTION,
 } from "@/lib/bcbs-plans"
 import {
   BCBS_MARKET_RANGE,
@@ -30,19 +32,22 @@ export default function PlansPage() {
     <div className="space-y-8">
       <header>
         <PageKicker>
-          {BCBS_CARRIER} · current {BCBS_CURRENT.effective} · draft{" "}
+          {BCBS_CARRIER} · current {BCBS_CURRENT.effective} · drafts{" "}
           {BCBS_DRAFT.effective}
         </PageKicker>
         <PageTitle>
-          The draft quotes a {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)} increase.
-          The paychecks move by more than that.
+          Blue Cross quotes {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The Troxell
+          sheet assumes {pct(TROXELL_ASSUMED_INCREASE_PCT, 0)}, on{" "}
+          {TROXELL_NETWORK_CORRECTION}.
         </PageTitle>
         <PageLead>
-          Two fully-insured sheets, same three cards: BlueEdge HSA 3500, PPO
-          2000, and PPO 1500. The 2026 sheet is current. The 2027 sheet is
-          marked draft and prints “quoted {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}{" "}
-          increase.” Plan design matches year to year. What changed is the
-          employee deduction per pay.
+          Three grids, same three cards: BlueEdge HSA 3500, PPO 2000, and PPO
+          1500. 2026 is the current Blue Cross sheet. The 2027 Blue Cross draft
+          quotes {pct(BCBS_DRAFT_QUOTED_INCREASE_PCT, 1)}. The 2027 Troxell draft
+          is a self-insured captive and prints an assumed{" "}
+          {pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase. Its carrier row still
+          says Blue Cross. That name is wrong. The network is{" "}
+          {TROXELL_NETWORK_CORRECTION}.
         </PageLead>
       </header>
 

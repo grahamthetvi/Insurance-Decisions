@@ -252,7 +252,7 @@ export const TROXELL_STACK = [
   {
     n: "01",
     title: "Independent TPA",
-    body: "A third-party administrator pays claims and runs member services. They are not the insurance company keeping the surplus. The pitch is: same job as today's carrier operations, with the district (and Troxell) able to see the data.",
+    body: "A third-party administrator pays claims and runs member services. They are not the insurance company keeping the surplus. The meeting did not name the firm. Consociate Health, in Decatur, is the name to confirm: it is an Illinois TPA, HealthLink lists Consociate Group among contracted TPAs, and Consociate's own provider list includes HealthLink and Springfield Clinic Advantage with HealthLink. That is public-website overlap, not a line on the Ball-Chatham sheet.",
   },
   {
     n: "02",
@@ -266,8 +266,8 @@ export const TROXELL_STACK = [
   },
   {
     n: "04",
-    title: "National wrap network",
-    body: "Aetna (they say the best priced of Aetna / Cigna / UMR) sits behind SCA so kids at college, snowbird care, and Barnes-Jewish still have an in-network card. Blue Cross generally will not rent its network to an outside TPA, which is why this is not a 'keep Blue Cross doctors, change the money' deal — it is a network change.",
+    title: "Network: Health Link, not the Blue card",
+    body: "The meeting recommended Aetna among Aetna / Cigna / UMR, behind Springfield Clinic Advantage. The later employee sheet still prints Blue Cross Blue Shield of Illinois in the carrier row. That cell is wrong. The provider network for this option is Health Link. Blue Cross generally will not rent its network to an outside TPA, which is why this was never a silent card swap. Ask for the disruption file against Health Link, not against the printed Blue Cross name.",
   },
   {
     n: "05",

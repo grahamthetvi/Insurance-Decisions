@@ -1,6 +1,8 @@
 import {
   BCBS_DRAFT,
   BCBS_DRAFT_QUOTED_INCREASE_PCT,
+  TROXELL_ASSUMED_INCREASE_PCT,
+  TROXELL_NETWORK_CORRECTION,
   rate,
 } from "@/lib/bcbs-plans"
 import { pct, usd } from "@/lib/money"
@@ -105,9 +107,9 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     company: "Troxell + unbundled stack",
     model: "captive",
     locked: true,
-    network: "SCA Tier 1 + Aetna wrap (Cigna/UMR were alternatives)",
+    network: `${TROXELL_NETWORK_CORRECTION} (committee correction). Meeting said SCA + Aetna wrap. The employee sheet still prints BCBS Illinois.`,
     pbm: "SmithRx, with likely Truveris oversight",
-    tpa: "Independent TPA (name still to confirm)",
+    tpa: "Not named on the sheet. Confirm Consociate Health (Decatur TPA).",
     stopLoss: "Specific + aggregate, medical and pharmacy (as presented)",
     specificDeductible: 150_000,
     lasers: "none-year-one",
@@ -116,7 +118,7 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     renewalPct: null,
     localSupport: "Springfield / Bloomington / Washington IL — high availability pitch",
     notes:
-      "Expected vs packet $6.41M is a loss (~$353k). Great vs packet is a ~23% save. Run the Quote lab before you quote either number in a board meeting. Year-one lasers $0. Confirm 2028 laser rights. Pharmacy reprice $312,760 is the main savings lever.",
+      `Expected vs packet $6.41M is a loss (~$353k). A separate 2027 employee sheet assumes a ${pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase and shows paycheck deductions, not this district total. That sheet prints Blue Cross as the carrier; the network is ${TROXELL_NETWORK_CORRECTION}. Consociate Health is a Decatur TPA that publicly lists HealthLink and Springfield Clinic Advantage with HealthLink. HealthLink lists Consociate Group as a contracted TPA. Neither name is printed on the Ball-Chatham sheet. Year-one lasers $0. Pharmacy reprice $312,760 is an estimate.`,
     pros: [
       "Unbundled vendors with separate medical and pharmacy reports you can actually read.",
       "Local coordinator in Springfield / Bloomington / Washington IL who shows up.",
@@ -124,13 +126,14 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     ],
     cons: [
       "Expected costs ~$353k more than the packet $6.41M line — you buy volatility, not a discount.",
-      "Network change: SCA Tier 1 plus an Aetna wrap, not the Blue card.",
+      "Network is not the Blue card. The meeting said an Aetna wrap. The new sheet's carrier row says Blue Cross, and that row is wrong: the network is Health Link. Those three stories do not match yet.",
       "Savings hinge on a $312,760 uncapped Rx reprice estimate, not a warranty.",
     ],
     openQuestions: [
       "What laser rights exist at 1/1/2028 — no-new-laser language or a cap?",
       "Is the pharmacy watchdog fee inside the $436,320 admin or extra?",
       "Who falls out on a disruption file (Memorial, HSHS, SIU, Barnes-Jewish)?",
+      "Is Consociate Health the TPA, and is Health Link the network, with or without Springfield Clinic Advantage?",
     ],
     provenance: "packet",
     sourceDetail:

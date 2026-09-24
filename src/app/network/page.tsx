@@ -54,6 +54,15 @@ export default function NetworkPage() {
         ))}
       </div>
 
+      <Callout tone="gold" title="The network name has changed since the meeting.">
+        The meeting described Springfield Clinic Advantage plus an Aetna wrap.
+        The Troxell employee sheet still prints Blue Cross in the carrier row.
+        That row is wrong. The network for this option is Health Link. Consociate
+        Health, a TPA in Decatur, is the firm to confirm: HealthLink lists
+        Consociate Group, and Consociate lists HealthLink. Neither name is on
+        the Ball-Chatham sheet.
+      </Callout>
+
       <Callout tone="risk" title="Do not skip the disruption file.">
         98% overlap is a marketing average. Run last year’s providers — PCPs,
         specialists, Memorial, HSHS, SIU, Barnes-Jewish — against SCA + Aetna.

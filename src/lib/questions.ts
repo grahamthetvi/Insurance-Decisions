@@ -1,4 +1,7 @@
-import { BCBS_DRAFT_QUOTED_INCREASE_PCT } from "@/lib/bcbs-plans"
+import {
+  BCBS_DRAFT_QUOTED_INCREASE_PCT,
+  TROXELL_ASSUMED_INCREASE_PCT,
+} from "@/lib/bcbs-plans"
 import { pct } from "@/lib/money"
 
 export type Question = {
@@ -81,6 +84,15 @@ export const QUESTIONS: Question[] = [
       "Year-one $0 lasers after they have seen the data is table stakes. Spouses as 6 of 10 large claimants is the year-two fight.",
     goodAnswerLooksLike:
       "Written no-new-laser, or a maximum laser amount, with the rate-cap that comes with it.",
+  },
+  {
+    id: "health-link",
+    to: "Troxell",
+    ask: `The employee sheet prints Blue Cross as the carrier and assumes a ${pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase. Confirm in writing: the network is Health Link, the TPA is or is not Consociate Health, and Springfield Clinic Advantage is or is not still tier 1.`,
+    because:
+      "The meeting described an Aetna wrap and did not name the TPA. Consociate Health publicly lists HealthLink and Springfield Clinic Advantage with HealthLink. HealthLink lists Consociate Group as a contracted TPA. None of that is the same thing as a signed name on this bid.",
+    goodAnswerLooksLike:
+      "One page: TPA legal name, network name, what happened to the Aetna option, and a provider search link staff can use.",
   },
   {
     id: "disruption",

@@ -97,7 +97,7 @@ export default function HomePage() {
           href="/plans"
           className={cn(buttonVariants({ size: "lg" }), "h-10 px-4")}
         >
-          Open the Blue Cross sheets
+          Open the plan sheets
         </Link>
         <Link
           href="/quote"

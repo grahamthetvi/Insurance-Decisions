@@ -1,7 +1,7 @@
 export const NAV = [
   { href: "/", label: "The fork", blurb: "What you are actually deciding" },
   { href: "/how-it-works", label: "How money moves", blurb: "Fully insured vs self-funded" },
-  { href: "/plans", label: "Blue Cross sheets", blurb: "2026 paychecks and the 2027 draft" },
+  { href: "/plans", label: "Plan sheets", blurb: "Blue Cross drafts and the Troxell grid" },
   { href: "/quote", label: "Quote lab", blurb: "Slide the Troxell math" },
   { href: "/network", label: "Doctors & tiers", blurb: "SCA, Aetna wrap, 3-tier" },
   { href: "/glossary", label: "Plain English", blurb: "Lasers, aggregate, PBM…" },

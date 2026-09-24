@@ -88,7 +88,7 @@ export const MEETING = {
         "No balance billing — get the actual promise. In-network contracted rates are the safe version of that sentence.",
       ],
       watchFor:
-        "Memorial, HSHS, SIU, and whoever your high-utilizing specialists are. 98% overlap can still leave out the one oncologist that matters.",
+        "A later Troxell employee sheet still prints Blue Cross as the carrier. That cell is wrong: the network is Health Link. The meeting's Aetna wrap is what was said in the room, not what the correction says. Confirm Consociate Health as the TPA. Memorial, HSHS, SIU, and the high-utilizing specialists still need a disruption file.",
     },
     {
       id: "pharmacy",

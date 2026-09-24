@@ -124,6 +124,43 @@ export const BCBS_YEARS: BcbsYear[] = [
 export const BCBS_CURRENT = BCBS_YEARS[0]
 export const BCBS_DRAFT = BCBS_YEARS[1]
 
+/**
+ * Headline printed on the Troxell 2027 draft: "assumed 12% increase".
+ * That is this sheet's assumption, not a fully-insured renewal and not the
+ * percent change in the paycheck columns.
+ */
+export const TROXELL_ASSUMED_INCREASE_PCT = 12
+
+/**
+ * Printed carrier cell on the Troxell sheet. The committee says this cell is
+ * wrong: the provider network is Health Link, not Blue Cross.
+ */
+export const TROXELL_SHEET_PRINTED_CARRIER = "BlueCross BlueShield of Illinois"
+export const TROXELL_NETWORK_CORRECTION = "Health Link"
+
+const RATES_TROXELL_2027: RateGrid = {
+  "hsa-3500": {
+    "24": { ee: 28.82, "ee-spouse": 278.43, "ee-child": 220.26, "ee-family": 666.06 },
+    "19": { ee: 36.41, "ee-spouse": 351.71, "ee-child": 278.22, "ee-family": 841.34 },
+  },
+  "ppo-2000": {
+    "24": { ee: 68.74, "ee-spouse": 320.66, "ee-child": 271.56, "ee-family": 709.36 },
+    "19": { ee: 86.82, "ee-spouse": 405.04, "ee-child": 343.03, "ee-family": 896.04 },
+  },
+  "ppo-1500": {
+    "24": { ee: 144.13, "ee-spouse": 429.38, "ee-child": 373.85, "ee-family": 869.52 },
+    "19": { ee: 182.06, "ee-spouse": 542.38, "ee-child": 472.23, "ee-family": 1098.34 },
+  },
+}
+
+export const TROXELL_EMPLOYEE_DRAFT: BcbsYear = {
+  year: 2027,
+  status: "draft",
+  effective: "01/01/2027",
+  quotedIncreasePct: TROXELL_ASSUMED_INCREASE_PCT,
+  rates: RATES_TROXELL_2027,
+}
+
 export type BenefitRow = {
   label: string
   group: string
