@@ -2,7 +2,7 @@ export const NAV = [
   { href: "/", label: "The fork", blurb: "What you are actually deciding" },
   { href: "/how-it-works", label: "How money moves", blurb: "Fully insured vs self-funded" },
   { href: "/plans", label: "Plan sheets", blurb: "Blue Cross drafts and the Troxell grid" },
-  { href: "/quote", label: "Quote lab", blurb: "Packet math and the 9/23 fee build" },
+  { href: "/quote", label: "Quote lab", blurb: "Compare the options, including the 9/23 fee build" },
   { href: "/network", label: "Doctors & tiers", blurb: "SCA, Aetna wrap, 3-tier" },
   { href: "/glossary", label: "Plain English", blurb: "Lasers, aggregate, PBM…" },
   { href: "/meeting", label: "Meeting notes", blurb: "What was said in the room" },

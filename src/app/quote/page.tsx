@@ -29,7 +29,8 @@ export default function QuotePage() {
         The lab opens on that draft percent. Meeting color (
         {BCBS_MARKET_RANGE[0]}–{BCBS_MARKET_RANGE[1]}%) is a separate preset.
         Interpolated points between 70 / 85 / 100 / 120% are from those four
-        printed columns, not a new model.
+        printed columns, not a new model. Further down, both specific
+        deductibles sit next to the fully-insured number you pick here.
       </PageLead>
       <div className="mt-8">
         <QuoteLab />
