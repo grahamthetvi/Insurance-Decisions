@@ -6,6 +6,12 @@ import {
   rate,
 } from "@/lib/bcbs-plans"
 import { pct, usd } from "@/lib/money"
+import { optionByDeductible } from "@/lib/quote-data"
+import {
+  ILLUSTRATION,
+  LASERS_PENDING,
+  annualMaxClaims,
+} from "@/lib/troxell-illustration"
 
 export type FundingModel =
   | "fully-insured"
@@ -107,43 +113,42 @@ export const SEED_OFFERINGS: VendorOffering[] = [
     company: "Troxell + unbundled stack",
     model: "captive",
     locked: true,
-    network: `${TROXELL_NETWORK_CORRECTION} (committee correction). Meeting said SCA + Aetna wrap. The employee sheet still prints BCBS Illinois.`,
-    pbm: "SmithRx, with likely Truveris oversight",
-    tpa: "Not named on the sheet. Confirm Consociate Health (Decatur TPA).",
-    stopLoss: "Specific + aggregate, medical and pharmacy (as presented)",
+    network: `${TROXELL_NETWORK_CORRECTION} and PHCS on the ${ILLUSTRATION.dated} illustration ($32 PEPM, out of area, 30% of savings), plus a Carle / Springfield Clinic / BJC line. Meeting said SCA + Aetna. The paycheck sheet still prints BCBS.`,
+    pbm: "Slate Rx on the 9/23 illustration ($6 PMPM billed on claims; $2.40 in the PEPM column). Meeting said SmithRx.",
+    tpa: "Consociate Health is named as the TPA fee on the 9/23 illustration. No dollar is printed on that row.",
+    stopLoss: "Specific + aggregate. Packet is 12/15. The 9/23 illustration is 12/12 and illustrative.",
     specificDeductible: 150_000,
-    lasers: "none-year-one",
+    lasers: "some",
     expectedAnnualCost: 6_763_333.33,
     maxAnnualCost: 7_991_392.41,
     renewalPct: null,
     localSupport: "Springfield / Bloomington / Washington IL — high availability pitch",
     notes:
-      `Expected vs packet $6.41M is a loss (~$353k). A separate 2027 employee sheet assumes a ${pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase and shows paycheck deductions, not this district total. That sheet prints Blue Cross as the carrier; the network is ${TROXELL_NETWORK_CORRECTION}. Consociate Health is a Decatur TPA that publicly lists HealthLink and Springfield Clinic Advantage with HealthLink. HealthLink lists Consociate Group as a contracted TPA. Neither name is printed on the Ball-Chatham sheet. Year-one lasers $0. Pharmacy reprice $312,760 is an estimate.`,
+      `The dollars in this row are the packet: Expected ${usd(optionByDeductible(150_000).rows.expected.totalCaptive)} and Maximum ${usd(optionByDeductible(150_000).rows.maximum.totalCaptive)} at a $150k specific, 12/15, laser $0. A later illustration dated ${ILLUSTRATION.dated} is 12/12 and illustrative. Its max-claims annual at $150k is ${usd(annualMaxClaims("150"), 2)} before Memorial Choice, with a laser of ${usd(LASERS_PENDING["150"])} pending nurse review. Consociate Health is named as the TPA on that illustration. Do not average the two documents.`,
     pros: [
       "Unbundled vendors with separate medical and pharmacy reports you can actually read.",
       "Local coordinator in Springfield / Bloomington / Washington IL who shows up.",
-      "Year-one lasers $0 after underwriting, as printed in the packet.",
+      "The packet prints year-one lasers at $0. The later illustration does not.",
     ],
     cons: [
       "Expected costs ~$353k more than the packet $6.41M line — you buy volatility, not a discount.",
-      "Network is not the Blue card. The meeting said an Aetna wrap. The new sheet's carrier row says Blue Cross, and that row is wrong: the network is Health Link. Those three stories do not match yet.",
-      "Savings hinge on a $312,760 uncapped Rx reprice estimate, not a warranty.",
+      "The 9/23 illustration prints lasers of $525,000 and $475,000, pending nurse review. The packet prints $0. One of those is wrong, or they are different deals.",
+      "Network stories conflict: meeting said Aetna, the paycheck sheet prints Blue Cross, the illustration prices HealthLink and PHCS.",
     ],
     openQuestions: [
-      "What laser rights exist at 1/1/2028 — no-new-laser language or a cap?",
-      "Is the pharmacy watchdog fee inside the $436,320 admin or extra?",
-      "Who falls out on a disruption file (Memorial, HSHS, SIU, Barnes-Jewish)?",
-      "Is Consociate Health the TPA, and is Health Link the network, with or without Springfield Clinic Advantage?",
+      "Which contract governs: packet 12/15 with laser $0, or the 9/23 illustration at 12/12 with lasers pending?",
+      "What is on the second tab of the laser sheet?",
+      "Who falls out on a disruption file for HealthLink, PHCS, Carle, Springfield Clinic, and BJC?",
     ],
     provenance: "packet",
     sourceDetail:
-      "Packet effective 1/1/2027, contract 12/15. Network, laser, and reprice color is meeting talk until the specimen and disruption file confirm it.",
+      `Packet effective 1/1/2027, contract 12/15, holds the Expected and Maximum dollars. The ${ILLUSTRATION.dated} illustration is a separate 12/12 max-claims build. Employee paycheck grid assumes a ${pct(TROXELL_ASSUMED_INCREASE_PCT, 0)} increase.`,
     effectiveDate: "1/1/2027",
     contractBasis: "12/15",
     aggregateDetails:
-      "Aggregate as the group ceiling near ~120% of expected (as presented); $58,031 aggregate premium at $150k. Confirm attachment and covered benefits on the specimen.",
+      "Packet: $58,031 aggregate premium at $150k, ceiling near ~120% of expected. Illustration: $10.56 PEPM aggregate premium and a max claims factor of $1,289.61 PEPM at $150k. Confirm which attachment is the deal.",
     rxDetails:
-      "Uncapped estimated Rx savings $312,760 per reprice. Confirm rebate pass-through and whether Truveris oversight is in the fees.",
+      "Packet reprice estimate $312,760. Illustration: Slate Rx, estimated rebates of $350,000, and a $2.40 PEPM column next to a $6.00 PMPM note. Meeting said SmithRx. These are not the same sentence.",
   },
 ]
 
